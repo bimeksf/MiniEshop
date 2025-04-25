@@ -1,3 +1,6 @@
+
+import RangeSlider from "./RangeSlider";
+
 export default function FilterBar({
   setSearchQuery,
   searchQuery,
@@ -6,6 +9,10 @@ export default function FilterBar({
   setSelectedCategory,
   setSortOrder,
   sortOrder,
+  setMinPrice,
+  setMaxPrice,
+  maxPrice,
+  minPrice
 }) {
   const categories = [...new Set(products.map((item) => item.category))];
 
@@ -28,6 +35,34 @@ export default function FilterBar({
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
+        <RangeSlider minPrice={minPrice}
+          maxPrice={maxPrice}
+          setMinPrice={setMinPrice}
+          setMaxPrice={setMaxPrice}
+          products={products}
+          />
+
+        <div className="flex items-center gap-2">
+    <input
+      className="min-value"
+      aria-label="min price"
+      type="text"
+      placeholder="Min price"
+      value={minPrice}
+      onChange={(e) => setMinPrice(e.target.value)}
+    />
+    <span className="text-xl font-bold">-</span>
+    <input
+      className="max-value"
+      aria-label="max price"
+      type="text"
+      placeholder="Max price"
+      value={maxPrice}
+            onChange={(e) => setMaxPrice(e.target.value)}
+    />
+  </div>
+
+
       </form>
 
       <div>
@@ -53,6 +88,10 @@ export default function FilterBar({
             );
           })}
         </ul>
+        <button className="px-3 py-2 bg-red-500 rounded-md" onClick={()=>{setSearchQuery(""); setSortOrder("all"); setSelectedCategory("all");setMinPrice("");
+    setMaxPrice("")
+}
+      }>Reset</button>
       </div>
     </div>
   );

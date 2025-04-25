@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 export default function ProductCard ({id,title,price,category,image	,rating		}){
-   return <div className="bg-slate-100 border-rose-50 border-2 text-left p-4" id={id}>
+   return <div className="bg-slate-100 border-rose-50 border-2 text-left p-4 hover:cursor-pointer hover:scale-105" id={id}>
     <Link to={`/products/${id}`}><img className="h-60 inline" src={image} alt="" /></Link>
 <div>
     <h2 className="text-lg font-bold ">{title}</h2>

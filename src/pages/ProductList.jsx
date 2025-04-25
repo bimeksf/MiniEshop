@@ -15,6 +15,8 @@ export default function ProductList() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOrder, setSortOrder] = useState("all");
+  const [maxPrice, setMaxPrice] = useState(null);
+  const [minPrice, setMinPrice] = useState(null)
 
   useEffect(() => {
     setIsLoading(true);
@@ -44,9 +46,28 @@ export default function ProductList() {
     if (searchQuery) {
       filtered = filtered.filter((p) =>
         p.title.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
+      )}
+      
+      const prices = products.map(p => p.price);
+      const min = Math.min(...prices);
+      const max = Math.max(...prices);
+      
 
+      if (minPrice === null || maxPrice === null) {
+        setMinPrice(min);
+        setMaxPrice(max);
+      }
+
+
+      if (minPrice !== null && minPrice !== "") {
+        filtered = filtered.filter((p) => p.price >= parseFloat(minPrice));
+      }
+      if (maxPrice !== null && maxPrice !== "") {
+        filtered = filtered.filter((p) => p.price <= parseFloat(maxPrice));
+      }
+
+
+    
     {
       /*  Sorting by price and az */
     }
@@ -59,7 +80,7 @@ export default function ProductList() {
     }
 
     setFilteredProducts(filtered);
-  }, [selectedCategory, searchQuery, sortOrder, products]);
+  }, [selectedCategory, searchQuery, sortOrder, products, minPrice, maxPrice]);
 
   if (isLoading) return <Loader />;
   if (error) return <Error />;
@@ -75,6 +96,10 @@ export default function ProductList() {
         sortOrder={sortOrder}
         setSearchQuery={setSearchQuery}
         searchQuery={searchQuery}
+        setMinPrice={setMinPrice}
+        setMaxPrice={setMaxPrice}
+        minPrice={minPrice}
+        maxPrice={maxPrice}
       />
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4 ">
         {filteredProducts.map((item) => {
