@@ -1,17 +1,13 @@
-import React from 'react';
 
-const Loader = () => {
+import React from "react";
+
+export default function Loader() {
   return (
-    <div className="flex flex-col bg-neutral-300 w-56 h-64 animate-pulse rounded-xl p-4 gap-4">
-      <div className="bg-neutral-400/50 w-full h-32 animate-pulse rounded-md" />
-      <div className="flex flex-col gap-2">
-        <div className="bg-neutral-400/50 w-full h-4 animate-pulse rounded-md" />
-        <div className="bg-neutral-400/50 w-4/5 h-4 animate-pulse rounded-md" />
-        <div className="bg-neutral-400/50 w-full h-4 animate-pulse rounded-md" />
-        <div className="bg-neutral-400/50 w-2/4 h-4 animate-pulse rounded-md" />
-      </div>
+    <div className="animate-pulse flex flex-col space-y-4 p-4 border rounded-lg shadow-md">
+      <div className="bg-gray-300 h-40 rounded-md"></div>
+      <div className="bg-gray-300 h-6 w-3/4 rounded"></div>
+      <div className="bg-gray-300 h-4 w-1/2 rounded"></div>
+      <div className="bg-gray-300 h-4 w-1/3 rounded"></div>
     </div>
   );
 }
-
-export default Loader;

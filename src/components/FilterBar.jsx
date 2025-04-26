@@ -12,7 +12,10 @@ export default function FilterBar({
   setMinPrice,
   setMaxPrice,
   maxPrice,
-  minPrice
+  minPrice,
+  checked,
+  setChecked,
+  setCurrentPage
 }) {
   const categories = [...new Set(products.map((item) => item.category))];
 
@@ -20,7 +23,7 @@ export default function FilterBar({
     <div className="flex flex-col gap-4">
       <form className="flex gap-4 items-center">
         <select
-          onChange={(e) => setSortOrder(e.target.value)}
+          onChange={(e) => {setSortOrder(e.target.value); setCurrentPage(1)}}
           value={sortOrder}
         >
           <option value="all">default</option>
@@ -33,7 +36,10 @@ export default function FilterBar({
           type="text"
           placeholder="Search..."
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+            setCurrentPage(1);
+          }}
         />
         <RangeSlider minPrice={minPrice}
           maxPrice={maxPrice}
@@ -49,7 +55,8 @@ export default function FilterBar({
       type="text"
       placeholder="Min price"
       value={minPrice}
-      onChange={(e) => setMinPrice(e.target.value)}
+    onChange={(e) => {setMinPrice(e.target.value);
+      setCurrentPage(1);}}
     />
     <span className="text-xl font-bold">-</span>
     <input
@@ -58,11 +65,20 @@ export default function FilterBar({
       type="text"
       placeholder="Max price"
       value={maxPrice}
-            onChange={(e) => setMaxPrice(e.target.value)}
+            onChange={(e) => {setMaxPrice(e.target.value);
+              setCurrentPage(1);}}
     />
   </div>
+<div>
 
-
+  <span>Hodnocení od zákazníků</span>
+          <label > Rating 4 and more 
+        <input type="checkbox" checked={checked} 
+        
+        onChange={()=>{setChecked(!checked);
+        setCurrentPage(1)}}/>
+          </label>
+</div>
       </form>
 
       <div>
@@ -89,7 +105,7 @@ export default function FilterBar({
           })}
         </ul>
         <button className="px-3 py-2 bg-red-500 rounded-md" onClick={()=>{setSearchQuery(""); setSortOrder("all"); setSelectedCategory("all");setMinPrice("");
-    setMaxPrice("")
+    setMaxPrice("") ;setChecked(false) ;setCurrentPage(1) 
 }
       }>Reset</button>
       </div>
