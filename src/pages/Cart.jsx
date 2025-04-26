@@ -1,5 +1,5 @@
 import { useCartStore } from "../contex/cartStore";
-import { useEffect } from 'react';
+import { Link } from "react-router-dom";
 export default function Cart() {
   const cartItems = useCartStore((state) => state.cartItems);
   const removeFromCart = useCartStore((state) => state.removeFromCart);
@@ -8,11 +8,7 @@ export default function Cart() {
   const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
 
   const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  useEffect(()=>{
-    localStorage.setItem("cartItems", JSON.stringify(cartItems))
 
-
-},[cartItems])
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
@@ -24,23 +20,29 @@ export default function Cart() {
           {cartItems.map((item) => (
             <div key={item.id} className="flex justify-between items-center border-b pb-2">
               <div>
+                <img className="w-20 h-20"  src={item.image} alt={item.title} />
                 <h2 className="text-lg font-semibold">{item.title}</h2>
-                <p>Quantity: {item.quantity}</p>
-                <button onClick={()=>increaseQuantity(item.id)}>+</button>
-                <button onClick={()=>decreaseQuantity(item.id)}>-</button>
+                <div className="flex justify-center items-center gap-2 border-2 border-black rounded-md">
+                <button className="p-2 hover:font-bold" onClick={()=>decreaseQuantity(item.id)}>-</button>
+                <span>{item.quantity}</span>
+                <button  className="p-2 hover:font-bold " onClick={()=>increaseQuantity(item.id)}>+</button>
+                </div>
+
               </div>
               <div className="text-right">
                 <p className="font-bold">${(item.price * item.quantity).toFixed(2)}</p>
               </div>
               <button onClick={()=>removeFromCart(item.id)}>X</button>
             </div>
+            
           ))}
-          <button onClick={clearCart}>Clear</button>
+          <button onClick={clearCart} className="font-bold bg-slate-200 rounded-md p-4" >Clear</button>
           <div className="text-right mt-4">
             <h2 className="text-xl font-bold">Total: ${totalPrice.toFixed(2)}</h2>
           </div>
         </div>
       )}
+      <Link to={"/checkout"} className="bg-slate-500 p-4 rounded-md">Proceed to Checkout</Link>
     </div>
   );
 }
