@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCartStore } from '../contex/cartStore';
-
+import { ShoppingCart } from "lucide-react";
 export default function Header() {
   const cartItems = useCartStore((state) => state.cartItems);
 
@@ -16,13 +16,10 @@ export default function Header() {
           <Link to="/products">Products</Link>
         </li>
         <li>
-          <Link to="/cart">Cart</Link>
+          <Link to="/cart"><ShoppingCart />{cartItems.length}</Link>
         </li>
         <li>
           <Link to="/login">Login</Link>
-        </li>
-        <li>
-        Košík ({cartItems.length})
         </li>
       </ul>
     </nav>
