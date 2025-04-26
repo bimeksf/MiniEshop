@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useCartStore } from '../contex/cartStore';
 
 
-export default function ProductCard ({id,title,price,category,image	,rating		}){
+export default function ProductCard ({id,title,price,category,image	,rating 	}){
   const addToCart = useCartStore((state) => state.addToCart);
    return <div className="bg-slate-100 border-rose-50 border-2 text-left p-4 hover:cursor-pointer hover:scale-105" id={id}>
     <Link to={`/products/${id}`}><img className="h-60 inline" src={image} alt="" /></Link>
@@ -29,6 +29,6 @@ export default function ProductCard ({id,title,price,category,image	,rating		}){
 
   </div>
 
-<button className="p-4 bg-gray-400 rounded-lg" onClick={()=>{addToCart({id,title,price,category,image	,rating		})}}>Buy</button>
+<button className="p-4 bg-gray-400 rounded-lg" onClick={()=>{addToCart({id,title,price,category,image	,rating	 	})}}>Buy</button>
 </div>
 }
