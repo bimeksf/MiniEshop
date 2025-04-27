@@ -6,10 +6,8 @@ import { ShoppingCart, Menu } from "lucide-react";
 export default function Header() {
   const cartItems = useCartStore((state) => state.cartItems);
   
-  // Stav pro řízení hamburger menu
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
-  // Funkce pro přepnutí menu
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
@@ -27,6 +25,9 @@ export default function Header() {
             <ShoppingCart />
             {cartItems.length > 0 && <span>{cartItems.length}</span>}
           </Link>
+
+            
+
           <Link to="/login" className="hover:text-gray-400">Login</Link>
         </nav>
 

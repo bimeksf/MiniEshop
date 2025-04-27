@@ -4,7 +4,7 @@ import FilterBar from "../components/FilterBar";
 import { fetchAllProducts } from "../utils/api";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom"; 
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function ProductList() {
@@ -19,9 +19,12 @@ export default function ProductList() {
   const [checked, setChecked] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams(); 
 
-  // url params
+
+
+
+// url params
   useEffect(() => {
     const page = searchParams.get("page");
     const category = searchParams.get("category");
@@ -29,7 +32,7 @@ export default function ProductList() {
     const sort = searchParams.get("sort");
     const minPriceParam = searchParams.get("minPrice");
     const maxPriceParam = searchParams.get("maxPrice");
-
+  
     if (page) setCurrentPage(Number(page));
     if (category) setSelectedCategory(category);
     if (search) setSearchQuery(search);
@@ -40,7 +43,7 @@ export default function ProductList() {
 
   useEffect(() => {
     const params = new URLSearchParams();
-
+  
     if (currentPage && currentPage !== 1)
       params.set("page", currentPage.toString());
     if (selectedCategory && selectedCategory !== "all")
@@ -51,8 +54,8 @@ export default function ProductList() {
       params.set("minPrice", minPrice.toString());
     if (maxPrice !== null && maxPrice !== "")
       params.set("maxPrice", maxPrice.toString());
-
-    setSearchParams(params);
+  
+    setSearchParams(params); 
   }, [
     currentPage,
     selectedCategory,
@@ -61,7 +64,7 @@ export default function ProductList() {
     minPrice,
     maxPrice,
   ]);
-
+  
   // pages setting
   const [productsPerPage] = useState(12);
 
@@ -80,9 +83,9 @@ export default function ProductList() {
     if (searchQuery) {
       filtered = filtered.filter(
         (p) =>
-          p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.description.toLowerCase().includes(searchQuery.toLowerCase())
+        p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.description.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
@@ -140,6 +143,8 @@ export default function ProductList() {
     getData();
   }, []);
 
+
+
   if (isLoading) {
     return (
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
@@ -185,15 +190,15 @@ export default function ProductList() {
                 ease: "easeOut",
               }}
             >
-              <ProductCard
-                key={item.id}
-                title={item.title}
-                price={item.price}
-                category={item.category}
-                image={item.image}
-                rating={item.rating}
-                id={item.id}
-              />
+          <ProductCard
+            key={item.id}
+            title={item.title}
+            price={item.price}
+            category={item.category}
+            image={item.image}
+            rating={item.rating}
+            id={item.id}
+          />
             </motion.div>
           );
         })}
