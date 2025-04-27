@@ -5,6 +5,7 @@ import { fetchAllProducts } from "../utils/api";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 import { useSearchParams } from "react-router-dom"; 
+import { AnimatePresence,  motion} from "framer-motion";
 
 
 
@@ -119,9 +120,7 @@ export default function ProductList() {
     getData();
   }, []);
 
-  if (!isLoading && filteredProducts.length === 0) {
-    return <div className="text-center py-8">No products match your filters.</div>;
-  }
+
 
   if (isLoading) {
     return (
@@ -153,19 +152,37 @@ export default function ProductList() {
         setChecked={setChecked}
         checked={checked}
       />
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
-        {currentProducts.map((item) => (
-          <ProductCard
-            key={item.id}
-            title={item.title}
-            price={item.price}
-            category={item.category}
-            image={item.image}
-            rating={item.rating}
-            id={item.id}
-          />
-        ))}
-      </div>
+     <div
+  className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4"
+
+>
+{currentProducts.map((item, index) => {
+    const isFirstRow = index < 4  // delay for first 4 items 
+
+    return (
+      <motion.div
+        key={item.id}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: isFirstRow ? index * 0.2 : 0,
+          duration: 0.4,
+          ease: "easeOut",
+        }}
+      >
+        <ProductCard
+          key={item.id}
+          title={item.title}
+          price={item.price}
+          category={item.category}
+          image={item.image}
+          rating={item.rating}
+          id={item.id}
+        />
+      </motion.div>
+    );
+  })}
+</div>
 
       <div className="flex gap-2 justify-center items-center">
         <button

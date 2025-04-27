@@ -1,5 +1,7 @@
+import { motion } from "framer-motion"; 
+import { useCartStore } from '../contex/cartStore';
 import { Star } from "lucide-react";
-import { useCartStore } from "../contex/cartStore";
+
 export default function ProductDetail({
   id,
   title,
@@ -13,19 +15,31 @@ export default function ProductDetail({
   const addToCart = useCartStore((state) => state.addToCart);
 
   return (
-    <div
-      className=" p-4 text-left  flex flex-col  md:flex-row   min-h-screen w-full gap-4 overflow-x-auto"
+    <motion.div
+      className="p-4 text-left flex flex-col md:flex-row min-h-screen w-full gap-4 overflow-x-auto"
       id={id}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }} 
     >
-      <img
+      <motion.img
         src={image}
         alt={title}
-        className="w-full md:w-[600px] h-[650px] object-contain bg-white p-4 rounded-3xl shadow-md  transition-transform duration-300 hover:scale-105"
+        className="w-full md:w-[600px] h-[650px] object-contain bg-white p-4 rounded-3xl shadow-md transition-transform duration-300 hover:scale-105"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
       />
 
-      <div className="p-4 bg-slate-200 rounded-3xl  flex-1 h-4/6">
-        <div className="flex  flex-wrap  flex-col mb-3 ">
+      <motion.div
+        className="p-4 bg-slate-200 rounded-3xl flex-1 h-4/6"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+      >
+        <div className="flex flex-wrap flex-col mb-3">
           <h2 className="text-3xl font-bold py-4">{title}</h2>
+
           <div className="flex gap-4">
             <div className="flex justify-center items-center">
               {[...Array(5)].map((_, index) => (
@@ -39,27 +53,56 @@ export default function ProductDetail({
                 />
               ))}
             </div>
-            <span className="font-bold text-3xl">{rating.rate}</span>
+            <motion.span
+              className="font-bold text-3xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
+              {rating.rate}
+            </motion.span>
           </div>
 
-          <p className=" font-bold text-sm py-4">
-            <span className=" text-gray-500">Category |</span> {category}{" "}
-          </p>
+          <motion.p
+            className="font-bold text-sm py-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
+            <span className="text-gray-500">Category |</span> {category}
+          </motion.p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className=" gap-2 flex-1 flex-col bg-slate-300 rounded-xl p-4 text-gray-500 min-h-24">
+          <motion.div
+            className="gap-2 flex-1 flex-col bg-slate-300 rounded-xl p-4 text-gray-500 min-h-24"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+          >
             <p className="text-sm font-bold text-black">Price</p>
             <p className="text-3xl font-bold text-black my-2">${price}</p>
-          </div>
-          <div className="flex flex-col gap-2  flex-1 bg-slate-300 rounded-xl p-4 text-gray-700 min-h-24">
+          </motion.div>
+
+          <motion.div
+            className="flex flex-col gap-2 flex-1 bg-slate-300 rounded-xl p-4 text-gray-700 min-h-24"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.6 }}
+          >
             <p className="text-sm font-bold text-black">Brand</p>
             <p>{brand}</p>
-          </div>
-          <div className="flex flex-col gap-2 flex-1 bg-slate-300 rounded-xl p-4 text-gray-700 min-h-24">
+          </motion.div>
+
+          <motion.div
+            className="flex flex-col gap-2 flex-1 bg-slate-300 rounded-xl p-4 text-gray-700 min-h-24"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2, duration: 0.7 }}
+          >
             <p className="text-sm font-bold text-black">Stock</p>
             <p>{rating.count}</p>
-          </div>
+          </motion.div>
         </div>
 
         <div className="my-4">
@@ -68,7 +111,7 @@ export default function ProductDetail({
         </div>
 
         <div className="flex gap-4">
-          <button
+          <motion.button
             className="p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
             onClick={() =>
               addToCart({
@@ -82,12 +125,21 @@ export default function ProductDetail({
                 brand,
               })
             }
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.9, duration: 0.5 }}
           >
             Buy
-          </button>
-          <button className="p-4 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition">
+          </motion.button>
+
+          <motion.button
+            className="p-4 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.5 }}
+          >
             Favourite
-          </button>
+          </motion.button>
         </div>
 
         <div>
@@ -104,11 +156,7 @@ export default function ProductDetail({
             </p>
           </div>
         </div>
-
-
-
-
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

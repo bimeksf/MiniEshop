@@ -3,13 +3,14 @@ import { useCartStore } from '../contex/cartStore';
 import { Star } from "lucide-react";
 import { useState } from "react";
 
+
 export default function ProductCard({ id, title, price, category, image, rating }) {
   const addToCart = useCartStore((state) => state.addToCart);
   const [isLoading, setIsLoading] = useState(true);
 
   return (
     <div 
-      className="bg-white border rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col group min-h-[520px]"
+      className="bg-white border rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col group min-h-[500px]"
       id={id}
     >
       <div className="relative w-full h-64 bg-slate-100 flex items-center justify-center">
@@ -29,10 +30,10 @@ export default function ProductCard({ id, title, price, category, image, rating 
 
       <div className="p-4 flex flex-col flex-grow justify-between">
         <div className="flex flex-col gap-4 flex-grow">
-          <div className=" min-h-[50px]">
+          <div className="min-h-[50px]">
             <h2 className="text-lg font-bold text-gray-800 line-clamp-2 flex-1 pr-4">{title}</h2>
           </div>
-            <p className="text-xs text-gray-500 whitespace-nowrap">{category}</p>
+          <p className="text-xs text-gray-500 whitespace-nowrap">{category}</p>
 
           <div className="flex items-center gap-2 min-h-[30px]">
             {[...Array(5)].map((_, index) => (

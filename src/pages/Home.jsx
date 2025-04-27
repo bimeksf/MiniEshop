@@ -5,7 +5,7 @@ import ProductCard from "../components/ProductCard";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 import { fetchAllProducts } from "../utils/api";
-
+import { AnimatePresence,  motion} from "framer-motion";
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -50,9 +50,18 @@ export default function Home() {
         <Link to={"/products"} className="text-blue-500 underline text-sm mb-6">View All</Link>
         <div className="grid grid-cols-4 grid-rows-1 gap-6">
           {!isLoading  &&
-            products.slice(0, 4).map((item) => {
+            products.slice(0, 4).map((item,index) => {
               return (
-      
+                <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: index * 0.2, 
+                  duration: 0.4, 
+                  ease: "easeOut",
+                }}
+              >
                 <ProductCard
                   key={item.id}
                   title={item.title}
@@ -62,7 +71,7 @@ export default function Home() {
                   rating={item.rating}
                   id={item.id}
                   />
-
+    </motion.div>
 
               );
             })}
