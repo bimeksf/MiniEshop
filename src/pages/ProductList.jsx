@@ -4,10 +4,8 @@ import FilterBar from "../components/FilterBar";
 import { fetchAllProducts } from "../utils/api";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
-import { useSearchParams } from "react-router-dom"; 
-import { AnimatePresence,  motion} from "framer-motion";
-
-
+import { useSearchParams } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function ProductList() {
   const [products, setProducts] = useState([]);
@@ -21,12 +19,9 @@ export default function ProductList() {
   const [checked, setChecked] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [searchParams, setSearchParams] = useSearchParams(); 
+  const [searchParams, setSearchParams] = useSearchParams();
 
-
-
-
-// url params
+  // url params
   useEffect(() => {
     const page = searchParams.get("page");
     const category = searchParams.get("category");
@@ -34,7 +29,7 @@ export default function ProductList() {
     const sort = searchParams.get("sort");
     const minPriceParam = searchParams.get("minPrice");
     const maxPriceParam = searchParams.get("maxPrice");
-  
+
     if (page) setCurrentPage(Number(page));
     if (category) setSelectedCategory(category);
     if (search) setSearchQuery(search);
@@ -45,17 +40,28 @@ export default function ProductList() {
 
   useEffect(() => {
     const params = new URLSearchParams();
-  
-    if (currentPage && currentPage !== 1) params.set("page", currentPage.toString());
-    if (selectedCategory && selectedCategory !== "all") params.set("category", selectedCategory);
+
+    if (currentPage && currentPage !== 1)
+      params.set("page", currentPage.toString());
+    if (selectedCategory && selectedCategory !== "all")
+      params.set("category", selectedCategory);
     if (searchQuery) params.set("search", searchQuery);
     if (sortOrder && sortOrder !== "all") params.set("sort", sortOrder);
-    if (minPrice !== null && minPrice !== "") params.set("minPrice", minPrice.toString());
-    if (maxPrice !== null && maxPrice !== "") params.set("maxPrice", maxPrice.toString());
-  
-    setSearchParams(params); 
-  }, [currentPage, selectedCategory, searchQuery, sortOrder, minPrice, maxPrice]);
-  
+    if (minPrice !== null && minPrice !== "")
+      params.set("minPrice", minPrice.toString());
+    if (maxPrice !== null && maxPrice !== "")
+      params.set("maxPrice", maxPrice.toString());
+
+    setSearchParams(params);
+  }, [
+    currentPage,
+    selectedCategory,
+    searchQuery,
+    sortOrder,
+    minPrice,
+    maxPrice,
+  ]);
+
   // pages setting
   const [productsPerPage] = useState(12);
 
@@ -72,10 +78,11 @@ export default function ProductList() {
     }
 
     if (searchQuery) {
-      filtered = filtered.filter((p) =>
-        p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.description.toLowerCase().includes(searchQuery.toLowerCase())
+      filtered = filtered.filter(
+        (p) =>
+          p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.description.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
@@ -99,11 +106,24 @@ export default function ProductList() {
     }
 
     return filtered;
-  }, [products, selectedCategory, searchQuery, sortOrder, minPrice, maxPrice, checked]);
+  }, [
+    products,
+    selectedCategory,
+    searchQuery,
+    sortOrder,
+    minPrice,
+    maxPrice,
+    checked,
+  ]);
 
-  const totalPages = filteredProducts.length ? Math.ceil(filteredProducts.length / productsPerPage) : 1;
+  const totalPages = filteredProducts.length
+    ? Math.ceil(filteredProducts.length / productsPerPage)
+    : 1;
 
-  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   useEffect(() => {
     setIsLoading(true);
@@ -119,8 +139,6 @@ export default function ProductList() {
     }
     getData();
   }, []);
-
-
 
   if (isLoading) {
     return (
@@ -152,37 +170,34 @@ export default function ProductList() {
         setChecked={setChecked}
         checked={checked}
       />
-     <div
-  className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4"
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
+        {currentProducts.map((item, index) => {
+          const isFirstRow = index < 4; // delay for first 4 items
 
->
-{currentProducts.map((item, index) => {
-    const isFirstRow = index < 4  // delay for first 4 items 
-
-    return (
-      <motion.div
-        key={item.id}
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: isFirstRow ? index * 0.2 : 0,
-          duration: 0.4,
-          ease: "easeOut",
-        }}
-      >
-        <ProductCard
-          key={item.id}
-          title={item.title}
-          price={item.price}
-          category={item.category}
-          image={item.image}
-          rating={item.rating}
-          id={item.id}
-        />
-      </motion.div>
-    );
-  })}
-</div>
+          return (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: isFirstRow ? index * 0.2 : 0,
+                duration: 0.4,
+                ease: "easeOut",
+              }}
+            >
+              <ProductCard
+                key={item.id}
+                title={item.title}
+                price={item.price}
+                category={item.category}
+                image={item.image}
+                rating={item.rating}
+                id={item.id}
+              />
+            </motion.div>
+          );
+        })}
+      </div>
 
       <div className="flex gap-2 justify-center items-center">
         <button
@@ -194,7 +209,9 @@ export default function ProductList() {
         </button>
         {Array.from({ length: totalPages }, (_, i) => (
           <button
-            className={`p-2 text-xl hover:underline ${currentPage === i + 1 && "font-medium bg-slate-200 rounded-md"}`}
+            className={`p-2 text-xl hover:underline ${
+              currentPage === i + 1 && "font-medium bg-slate-200 rounded-md"
+            }`}
             key={i}
             onClick={() => setCurrentPage(i + 1)}
           >
@@ -202,7 +219,9 @@ export default function ProductList() {
           </button>
         ))}
         <button
-          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          onClick={() =>
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+          }
           disabled={currentPage === totalPages}
           className="disabled:opacity-50 text-xl hover:scale-150"
         >

@@ -48,7 +48,10 @@ export default function Home() {
         Home Page
         <div className="text-2xl font-semibold mb-4">Doporučené produkty</div>
         <Link to={"/products"} className="text-blue-500 underline text-sm mb-6">View All</Link>
-        <div className="grid grid-cols-4 grid-rows-1 gap-6">
+        <div
+  className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4"
+
+>
           {!isLoading  &&
             products.slice(0, 4).map((item,index) => {
               return (
