@@ -1,34 +1,62 @@
 import { Link } from "react-router-dom";
 import { useCartStore } from '../contex/cartStore';
+import { Star } from "lucide-react";
+import { useState } from "react";
 
-
-export default function ProductCard ({id,title,price,category,image	,rating 	}){
+export default function ProductCard({ id, title, price, category, image, rating }) {
   const addToCart = useCartStore((state) => state.addToCart);
-   return <div className="bg-slate-100 border-rose-50 border-2 text-left p-4 hover:cursor-pointer hover:scale-105" id={id}>
-    <Link to={`/products/${id}`}><img className="h-60 inline" src={image} alt="" /></Link>
-<div>
-    <h2 className="text-lg font-bold ">{title}</h2>
-    <p className="text-sm text-gray-500">{category}</p>
-  </div>      
-  <div className="flex gap-4">
-   <p>******</p>
-      <span className="font-bold text-md">{rating.rate}</span>
-  </div>
+  const [isLoading, setIsLoading] = useState(true);
 
-  <div className="flex  flex-wrap  flex-col mb-3 ">
-      <h2 className="text-red-500 font-bold text-lg">{price}</h2>
-      <div>
-
-        <span className="line-through mr-2 text-gray-500">
-        {price}
-        </span>
-        <span className="font-bold text-lg ">
-        -15%
-        </span>
+  return (
+    <div 
+      className="bg-white border rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col group min-h-[520px]"
+      id={id}
+    >
+      <div className="relative w-full h-64 bg-slate-100 flex items-center justify-center">
+        {isLoading && (
+          <div className="absolute inset-0 animate-pulse bg-gray-300" />
+        )}
+        <Link to={`/products/${id}`}>
+          <img 
+            src={image} 
+            alt={title} 
+            className={`h-40 object-contain mx-auto transition-transform duration-300 ${isLoading ? 'opacity-0' : 'opacity-100 group-hover:scale-110'}`}
+            onLoad={() => setIsLoading(false)}
+            loading="lazy"
+          />
+        </Link>
       </div>
 
-  </div>
+      <div className="p-4 flex flex-col flex-grow justify-between">
+        <div className="flex flex-col gap-4 flex-grow">
+          <div className=" min-h-[50px]">
+            <h2 className="text-lg font-bold text-gray-800 line-clamp-2 flex-1 pr-4">{title}</h2>
+          </div>
+            <p className="text-xs text-gray-500 whitespace-nowrap">{category}</p>
 
-<button className="p-4 bg-gray-400 rounded-lg" onClick={()=>{addToCart({id,title,price,category,image	,rating	 	})}}>Buy</button>
-</div>
+          <div className="flex items-center gap-2 min-h-[30px]">
+            {[...Array(5)].map((_, index) => (
+              <Star
+                key={index}
+                size={18}
+                className={index < Math.round(rating.rate) ? "text-yellow-400 fill-yellow-400" : "text-gray-300"}
+              />
+            ))}
+            <span className="text-sm font-semibold">{rating.rate}</span>
+          </div>
+
+          <div className="min-h-[40px]">
+            <h2 className="text-2xl font-extrabold text-red-500">${price}</h2>
+          </div>
+        </div>
+
+        <button
+          className="mt-4 p-3 w-full bg-blue-500 text-white rounded-xl font-semibold hover:bg-blue-600 active:scale-95 transition-all duration-300"
+          onClick={() => addToCart({ id, title, price, category, image, rating })}
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  );
 }
