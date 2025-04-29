@@ -158,80 +158,87 @@ export default function ProductList() {
   if (!isLoading && products.length === 0) return <div>No Products found</div>;
 
   return (
-    <div>
-      <FilterBar
-        products={products}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-        setCurrentPage={setCurrentPage}
-        setSortOrder={setSortOrder}
-        sortOrder={sortOrder}
-        setSearchQuery={setSearchQuery}
-        searchQuery={searchQuery}
-        setMinPrice={setMinPrice}
-        setMaxPrice={setMaxPrice}
-        minPrice={minPrice}
-        maxPrice={maxPrice}
-        setChecked={setChecked}
-        checked={checked}
-      />
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
-        {currentProducts.map((item, index) => {
-          const isFirstRow = index < 4; // delay for first 4 items
-
-          return (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: isFirstRow ? index * 0.2 : 0,
-                duration: 0.4,
-                ease: "easeOut",
-              }}
-            >
-          <ProductCard
-            key={item.id}
-            title={item.title}
-            price={item.price}
-            category={item.category}
-            image={item.image}
-            rating={item.rating}
-            id={item.id}
-          />
-            </motion.div>
-          );
-        })}
+    <div className="flex">
+      <div className="fixed top-20 left-0 w-64 h-screen bg-white shadow-lg overflow-y-auto">
+        <FilterBar
+          products={products}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          setCurrentPage={setCurrentPage}
+          setSortOrder={setSortOrder}
+          sortOrder={sortOrder}
+          setSearchQuery={setSearchQuery}
+          searchQuery={searchQuery}
+          setMinPrice={setMinPrice}
+          setMaxPrice={setMaxPrice}
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+          setChecked={setChecked}
+          checked={checked}
+        />
       </div>
 
-      <div className="flex gap-2 justify-center items-center">
-        <button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-          className="disabled:opacity-50 text-xl hover:scale-150"
-        >
-          ‹
-        </button>
-        {Array.from({ length: totalPages }, (_, i) => (
+      {/* Main Content - Product cards and pagination */}
+      <div className="ml-64 w-full p-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-16">
+          {currentProducts.map((item, index) => {
+            const isFirstRow = index < 4; // delay for first 4 items
+
+            return (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: isFirstRow ? index * 0.2 : 0,
+                  duration: 0.4,
+                  ease: 'easeOut',
+                }}
+              >
+                <ProductCard
+                  key={item.id}
+                  title={item.title}
+                  price={item.price}
+                  category={item.category}
+                  image={item.image}
+                  rating={item.rating}
+                  id={item.id}
+                />
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Pagination */}
+        <div className="flex gap-2 justify-center items-center mt-6">
           <button
-            className={`p-2 text-xl hover:underline ${
-              currentPage === i + 1 && "font-medium bg-slate-200 rounded-md"
-            }`}
-            key={i}
-            onClick={() => setCurrentPage(i + 1)}
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="disabled:opacity-50 text-xl hover:scale-150"
           >
-            {i + 1}
+            ‹
           </button>
-        ))}
-        <button
-          onClick={() =>
-            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-          }
-          disabled={currentPage === totalPages}
-          className="disabled:opacity-50 text-xl hover:scale-150"
-        >
-          ›
-        </button>
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              className={`p-2 text-xl hover:underline ${
+                currentPage === i + 1 && 'font-medium bg-slate-200 rounded-md'
+              }`}
+              key={i}
+              onClick={() => setCurrentPage(i + 1)}
+            >
+              {i + 1}
+            </button>
+          ))}
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+            className="disabled:opacity-50 text-xl hover:scale-150"
+          >
+            ›
+          </button>
+        </div>
       </div>
     </div>
   );

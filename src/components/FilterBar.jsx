@@ -94,7 +94,7 @@ export default function FilterBar({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-600">Category</label>
+          <label className="block text-sm  text-black font-bold">Category</label>
           <ul className="flex gap-4 flex-wrap mt-2">
             <li
               onClick={() => setSelectedCategory("all")}

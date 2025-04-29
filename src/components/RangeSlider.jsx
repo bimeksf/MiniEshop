@@ -16,7 +16,7 @@ const maxProductPrice = Math.max(...products.map(p => p.price));
   };
 
   return (
-    <Box sx={{ width: 300 }}>
+    <Box sx={{ width: 200 }}>
       <Slider
         getAriaLabel={() => 'Price range'}
         value={value}
