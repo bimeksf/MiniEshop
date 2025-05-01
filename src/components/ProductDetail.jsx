@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"; 
 import { useCartStore } from '../contex/cartStore';
-import { Star } from "lucide-react";
+import { Star,Heart } from "lucide-react";
+import toast from "react-hot-toast";
 
 export default function ProductDetail({
   id,
@@ -13,6 +14,11 @@ export default function ProductDetail({
   brand,
 }) {
   const addToCart = useCartStore((state) => state.addToCart);
+  const handleBuy = () => {
+    const product = { id, title, price, category, image, rating, description, brand };
+    addToCart(product);
+    toast.success(`${product.title} byl přidán do košíku`);
+  };
 
   return (
     <motion.div
@@ -113,18 +119,7 @@ export default function ProductDetail({
         <div className="flex gap-4">
           <motion.button
             className="p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
-            onClick={() =>
-              addToCart({
-                id,
-                title,
-                price,
-                category,
-                image,
-                rating,
-                description,
-                brand,
-              })
-            }
+            onClick={handleBuy}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9, duration: 0.5 }}
@@ -138,7 +133,7 @@ export default function ProductDetail({
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 0.5 }}
           >
-            Favourite
+            <Heart />
           </motion.button>
         </div>
 

@@ -6,6 +6,10 @@ import Loader from "../components/Loader";
 import Error from "../components/Error";
 import { useSearchParams } from "react-router-dom"; 
 import { AnimatePresence, motion } from "framer-motion";
+import toast from "react-hot-toast";
+import { useCartStore } from "../contex/cartStore";
+
+
 
 export default function ProductList() {
   const [products, setProducts] = useState([]);
@@ -18,10 +22,11 @@ export default function ProductList() {
   const [minPrice, setMinPrice] = useState("");
   const [checked, setChecked] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-
+  
   const [searchParams, setSearchParams] = useSearchParams(); 
 
-
+  const { addToCart } = useCartStore();
+  
 
 
 // url params
@@ -118,7 +123,7 @@ export default function ProductList() {
     maxPrice,
     checked,
   ]);
-
+  
   const totalPages = filteredProducts.length
     ? Math.ceil(filteredProducts.length / productsPerPage)
     : 1;
@@ -156,6 +161,12 @@ export default function ProductList() {
   }
   if (error) return <Error />;
   if (!isLoading && products.length === 0) return <div>No Products found</div>;
+
+
+  const handleBuy = (product) => {
+    addToCart(product);
+    toast.success(`${product.title} added to Cart`);
+  };
 
   return (
     <div className="flex">
@@ -203,6 +214,7 @@ export default function ProductList() {
                   image={item.image}
                   rating={item.rating}
                   id={item.id}
+                  onBuy={() => handleBuy(item)}
                 />
               </motion.div>
             );

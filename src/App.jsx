@@ -11,7 +11,6 @@ import Checkout from "./pages/CheckoutPage"
 import Layout from "./components/Layout"
 
 
-
 function App() {
 
   return (

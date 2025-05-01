@@ -6,10 +6,20 @@ import Loader from "../components/Loader";
 import Error from "../components/Error";
 import { fetchAllProducts } from "../utils/api";
 import { AnimatePresence,  motion} from "framer-motion";
+
+import { useCartStore } from '../contex/cartStore';
+import toast from 'react-hot-toast';
+
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const addToCart = useCartStore((state) => state.addToCart);
+
+  const handleBuy = (product) => {
+    addToCart(product);
+    toast.success(`${product.title} added to Cart`);
+  }
 
   useEffect(() => {
     setIsLoading(true);
@@ -73,6 +83,8 @@ export default function Home() {
                   image={item.image}
                   rating={item.rating}
                   id={item.id}
+                  onBuy={() => handleBuy(item)}
+
                   />
     </motion.div>
 

@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { useCartStore } from '../contex/cartStore';
 import { Star } from "lucide-react";
 import { useState } from "react";
+import { motion } from "framer-motion"; 
 
 
-export default function ProductCard({ id, title, price, category, image, rating }) {
-  const addToCart = useCartStore((state) => state.addToCart);
+
+
+export default function ProductCard({ id, title, price, category, image, rating ,onBuy }) {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
@@ -51,12 +52,14 @@ export default function ProductCard({ id, title, price, category, image, rating 
           </div>
         </div>
 
-        <button
-          className="mt-4 p-3 w-full bg-blue-500 text-white rounded-xl font-semibold hover:bg-blue-600 active:scale-95 transition-all duration-300"
-          onClick={() => addToCart({ id, title, price, category, image, rating })}
-        >
-          Add to Cart
-        </button>
+       
+        <motion.button
+        whileTap={{ scale: 0.9 }}
+        onClick={onBuy}
+                className="bg-blue-500 text-white px-4 py-2 mt-2 rounded hover:bg-blue-600"
+      >
+        Buy
+      </motion.button>
       </div>
     </div>
   );
