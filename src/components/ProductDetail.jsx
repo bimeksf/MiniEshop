@@ -17,7 +17,7 @@ export default function ProductDetail({
   const handleBuy = () => {
     const product = { id, title, price, category, image, rating, description, brand };
     addToCart(product);
-    toast.success(`${product.title} byl přidán do košíku`);
+    toast.success(`${product.title} added to Cart`);
   };
 
   return (

@@ -4,7 +4,7 @@ import { ShoppingCart, Menu,House,CircleUserRound,BookOpenText } from "lucide-re
 export default function Header() {
   const cartItems = useCartStore((state) => state.cartItems);
   
-  
+  const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
       <header className="bg-gray-800 p-4 fixed bottom-0 w-full z-40 md:top-0 md:bottom-auto">
@@ -21,7 +21,7 @@ export default function Header() {
           <Link to="/login" className="hover:text-gray-400"><CircleUserRound /></Link>
           <Link to="/cart" className="flex items-center gap-1 hover:text-gray-400">
             <ShoppingCart />
-            {cartItems.length > 0 && <span>{cartItems.length}</span>}
+            {cartItems.length > 0 && <span>{totalQuantity}</span>}
           </Link>
         </nav>
 
