@@ -88,7 +88,7 @@ export default function Cart() {
           </ul>
               <h2 className="text-xl font-bold">Total: ${totalPrice.toFixed(2)}</h2>
               <Link
-                to={"/checkout"}
+                to={"/payment"}
                 className="bg-slate-500 p-4 rounded-md text-center w-full md:w-auto"
               >
                 Proceed to Checkout
