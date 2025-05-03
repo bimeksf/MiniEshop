@@ -3,7 +3,7 @@ import { Star } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion"; 
 
-
+import WishlistButton from "./WishlistButton"
 
 
 export default function ProductCard({ id, title, price, category, image, rating ,onBuy }) {
@@ -11,10 +11,10 @@ export default function ProductCard({ id, title, price, category, image, rating 
 
   return (
     <div 
-      className="bg-white border rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col group min-h-[500px]"
+      className="bg-white border rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col group min-h-[500px] relative"
       id={id}
     >
-      <div className="relative w-full h-64 bg-slate-100 flex items-center justify-center">
+      <div className="relative w-full h-64 bg-slate-100 flex items-center justify-center ">
         {isLoading && (
           <div className="absolute inset-0 animate-pulse bg-gray-300" />
         )}
@@ -22,12 +22,19 @@ export default function ProductCard({ id, title, price, category, image, rating 
           <img 
             src={image} 
             alt={title} 
-            className={`h-40 object-contain mx-auto transition-transform duration-300 ${isLoading ? 'opacity-0' : 'opacity-100 group-hover:scale-110'}`}
+            className={`h-40 object-contain mx-auto transition-transform duration-300 ${isLoading ? 'opacity-0' : 'opacity-100 group-hover:scale-110'} `}
             onLoad={() => setIsLoading(false)}
             loading="lazy"
           />
         </Link>
+        
       </div>
+                  <WishlistButton     product={{ id, title, price, category, image, rating}} 
+                  
+                  
+  className="absolute top-2 right-2 z-10"
+                  
+                  />
 
       <div className="p-4 flex flex-col flex-grow justify-between">
         <div className="flex flex-col gap-4 flex-grow">

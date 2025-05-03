@@ -5,6 +5,7 @@ export const useCartStore = create(
   persist(
     (set) => ({
       cartItems: [],
+      wishItems: [],
 
       addToCart: (product) => {
         set((state) => {
@@ -25,6 +26,21 @@ export const useCartStore = create(
           }
         });
       },
+      addToWishList: (product) => {
+        set((state) => {
+          const exists = state.wishItems.find(item => item.id === product.id);
+      
+          if (exists) return {}; 
+      
+          return {
+            wishItems: [...state.wishItems, product],
+          };
+        });
+      },
+
+      removeFromWishList: (id) => set((state) => ({
+        wishItems: state.wishItems.filter(item => item.id !== id),
+      })),
 
       removeFromCart: (id) => set((state) => ({
         cartItems: state.cartItems.filter(item => item.id !== id),

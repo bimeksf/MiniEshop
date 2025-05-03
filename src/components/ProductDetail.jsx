@@ -3,6 +3,8 @@ import { useCartStore } from '../contex/cartStore';
 import { Star,Heart } from "lucide-react";
 import toast from "react-hot-toast";
 
+import WishlistButton from "./WishlistButton"
+
 export default function ProductDetail({
   id,
   title,
@@ -14,11 +16,16 @@ export default function ProductDetail({
   brand,
 }) {
   const addToCart = useCartStore((state) => state.addToCart);
+
+
   const handleBuy = () => {
     const product = { id, title, price, category, image, rating, description, brand };
     addToCart(product);
     toast.success(`${product.title} added to Cart`);
   };
+
+
+
 
   return (
     <motion.div
@@ -127,14 +134,12 @@ export default function ProductDetail({
             Buy
           </motion.button>
 
-          <motion.button
-            className="p-4 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.5 }}
-          >
-            <Heart />
-          </motion.button>
+
+
+
+
+          <WishlistButton     product={{ id, title, price, category, image, rating, description, brand }}/>
+
         </div>
 
         <div>
