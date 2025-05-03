@@ -31,8 +31,8 @@ function App() {
 
 
     <Route element={<Auth/>}>
-        <Route path="/payment" element={<CheckoutPage />} />
-        <Route path="/wishlist" element={<WhishList />} />
+        <Route path="payment" element={<CheckoutPage />} />
+        <Route path="wishlist" element={<WhishList />} />
         
 
     </Route>

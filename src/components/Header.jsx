@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useCartStore } from '../contex/cartStore';
-import { ShoppingCart, Menu,House,CircleUserRound,BookOpenText } from "lucide-react";
+import { ShoppingCart, Menu,House,CircleUserRound,BookOpenText ,Heart} from "lucide-react";
 export default function Header() {
   const cartItems = useCartStore((state) => state.cartItems);
   
@@ -19,6 +19,7 @@ export default function Header() {
 
 
           <Link to="/login" className="hover:text-gray-400"><CircleUserRound /></Link>
+          <Link to="/wishlist" className="hover:text-gray-400"><Heart /></Link>
           <Link to="/cart" className="flex items-center gap-1 hover:text-gray-400">
             <ShoppingCart />
             {cartItems.length > 0 && <span>{totalQuantity}</span>}

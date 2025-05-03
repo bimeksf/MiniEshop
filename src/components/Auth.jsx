@@ -1,13 +1,10 @@
-import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
-useState
+import { Link, Navigate, Outlet,useLocation    } from "react-router-dom";
 export default function Auth () {
-
-    const isLoggedIn = localStorage.getItem("isLoggedIn")
-
+    const isLoggedIn = localStorage.getItem("loggedin") === "true"
+    const location = useLocation()
 
     if(!isLoggedIn)
-        <Link to="/login"  state={{message:"you must log in"}} replace/>;
+       return  <Navigate to="/login"  state={{from: location, message:"you must log in"}} replace/>;
 
     return <Outlet/>
 
