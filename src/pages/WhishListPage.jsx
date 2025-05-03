@@ -3,7 +3,7 @@ export default function WhishListPage (){
 
 return(
 
-    <h1></h1>
+    <h1 >Whislist products</h1>
 )
 
 

@@ -1,3 +1,3 @@
 export default function Checkout(){
-    return <h1>checkout page</h1>
+    return <h1 className="">payment page</h1>
 }

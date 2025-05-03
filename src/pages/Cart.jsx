@@ -12,7 +12,7 @@ export default function Cart() {
   const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <div className="p-4 h-screen">
+    <div className="p-4 h-screen ">
       <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
 
       {cartItems.length === 0 ? (

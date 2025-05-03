@@ -191,7 +191,7 @@ export default function ProductList() {
 
       {/* Main Content - Product cards and pagination */}
       <div className="ml-64 w-full p-4">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-16">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-16 ">
           {currentProducts.map((item, index) => {
             const isFirstRow = index < 4; // delay for first 4 items
 

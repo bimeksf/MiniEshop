@@ -1,18 +1,23 @@
-import { Outlet } from "react-router-dom"
-import Header from "./Header"
+import { Outlet, useLocation } from "react-router-dom";
+import Header from "./Header";
 import React from "react";
 import { Toaster } from "react-hot-toast";
 
 const Layout = () => {
+  const location = useLocation()
+
+  const noPaddingRoutes = ["/products"]
+  const addPadding = !noPaddingRoutes.includes(location.pathname);
+
   return (
     <>
       <Header />
-      <main className="mx-2">
+      <main className={addPadding ? "pt-20" : ""}>
         <Outlet />
       </main>
       <Toaster position="top-right" reverseOrder={false} />
     </>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
