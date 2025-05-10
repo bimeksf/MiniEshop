@@ -169,7 +169,7 @@ export default function ProductList() {
   };
 
   return (
-    <div className="flex bg-slate-400">
+    <div className="flex bbg-[#414141]">
       <div className="fixed top-20 left-0 w-64 h-screen bg-white shadow-lg overflow-y-auto ">
         <FilterBar
           products={products}

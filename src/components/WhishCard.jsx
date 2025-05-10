@@ -17,7 +17,7 @@ export default function WishlistCard() {
   }
 
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-16 bg-slate-400">
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-16 bg-[#414141]">
       {wishItems.map((item, index) => {
         const isFirstRow = index < 4;
 

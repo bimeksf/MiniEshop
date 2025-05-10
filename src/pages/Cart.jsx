@@ -12,8 +12,8 @@ export default function Cart() {
   const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <div className="p-4 h-screen  bg-slate-400 ">
-      <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
+    <div className="p-4 h-screen  bg-[#414141] ">
+      <h1 className="text-2xl font-bold mb-4 text-white">Your Cart</h1>
 
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
@@ -76,7 +76,7 @@ export default function Cart() {
           </div>
 
           {/* Right half: Clear button and Checkout */}
-          <div className="flex-1 flex flex-col items-end">
+          <div className="flex-1 flex flex-col items-end text-white">
             <div className="text-right mt-4 flex flex-col gap-4 w-full">
                       <ul className="space-y-2">
             {cartItems.map((item) => (

@@ -9,7 +9,8 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { motion } from "framer-motion"; 
 export default function Login() {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
-
+  const [isHovered, setIsHovered] = useState(false)
+ 
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/payment";
@@ -30,17 +31,23 @@ export default function Login() {
     setLoginData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
+
   return (
     <section className="h-screen bg-[#414141] flex items-center justify-center ">
       <motion.div 
    
            initial={{opacity:0 , y:20}}
         animate={{opacity:1 , y:0}}
-        transition={{ delay: 1, duration: 0.6, ease: "easeOut" }}
+        transition={{ delay: 0.5, duration: 0.4, ease: "easeOut" }}
       
+      onMouseEnter={() => setIsHovered(true)} 
+        onMouseLeave={() => setIsHovered(false)} 
       
-      
-      className="p-6 max-w-sm w-full bg-[#181818] rounded-2xl ml-4 mr-4 md:ml-0 md:mr-0">
+      className="p-6 max-w-sm w-full bg-[#181818] rounded-2xl ml-4 mr-4 md:ml-0 md:mr-0 relative">
+
+
+
+
         <div className="text-center mb-12">
           <h1 className="text-white text-3xl p-2">Welcome Back</h1>
           <p className="text-[#757575]">
@@ -50,10 +57,23 @@ export default function Login() {
             </span>
           </p>
         </div>
+        {isHovered &&  <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.8 }}
+        transition={{ duration: 0.3 }}
+className="absolute left-20 top-[-80px] transform -translate-x-1/2 -translate-y-1/2 bg-slate-100 p-4 rounded-md shadow-lg z-10 w-64 text-center"      >
+          <p className="text-sm">
+          Email: <span className="font-bold">test@test.com</span>  password:{""}
+          <span className="font-bold">test</span>
+        </p>
+          
+          </motion.div>}
 
         {location.state?.message && (
           <div className="text-red-500 mb-2">{location.state.message}</div>
         )}
+
 
         <form onSubmit={handleForm} className="flex flex-col gap-4">
           <div className="relative w-full">

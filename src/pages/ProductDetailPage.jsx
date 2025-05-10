@@ -36,7 +36,7 @@ export default function ProductDetailPage() {
   if (!product) return <div>Produkt nenalezen.</div>;
 
   return (
-    <div className="min-h-screen w-full bg-slate-50">
+    <div className="min-h-screen w-full bg-[#414141]">
       <ProductDetail
         key={product.id}
         title={product.title}
