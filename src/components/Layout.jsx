@@ -6,13 +6,13 @@ import { Toaster } from "react-hot-toast";
 const Layout = () => {
   const location = useLocation()
 
-  const noPaddingRoutes = ["/products","/"]
+  const noPaddingRoutes = ["/products","/","/login"]
   const addPadding = !noPaddingRoutes.includes(location.pathname);
 
   return (
     <>
       <Header />
-      <main className={addPadding ? "pt-20" : ""}>
+      <main className={addPadding ? "pt-16" : ""}>
         <Outlet />
       </main>
       <Toaster position="top-right" reverseOrder={false} />

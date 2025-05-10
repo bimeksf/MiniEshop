@@ -65,11 +65,12 @@ export default function Home() {
         animate={{opacity:1 , y:0}}
         transition={{ delay: 0.5, duration: 0.6, ease: "easeOut" }}
         
-        className="text-5xl font-bold mb-4">Welcome to our Eshop</motion.h1>
-        <motion.p   initial={{opacity:0 , y:20}}
+        className=" text-xl  md:text-5xl font-bold mb-4">Welcome to our Eshop</motion.h1>
+        <motion.p 
+          initial={{opacity:0 , y:20}}
         animate={{opacity:1 , y:0}}
         transition={{ delay: 1, duration: 0.6, ease: "easeOut" }}
-        className="text-xl mb-8 text-center max-w-xl">
+        className="md:text-xl  text-base  mb-8 text-center max-w-xl">
         Your one-stop destination for everything you need. From gadgets to fashion, find quality products at unbeatable prices!         </motion.p>
         
         <motion.div
@@ -90,7 +91,7 @@ export default function Home() {
 
       {/* Product section*/}
       <section id="products" className="min-h-screen px-4 py-16 bg-slate-400 text-black">
-        <div className="text-3xl font-bold text-center  flex justify-between items-center mb-8">
+        <div className="text-3xl font-bold text-center  flex flex-col md:justify-between md:flex-row items-center mb-8">
 
 
         <h2>Our Products </h2>

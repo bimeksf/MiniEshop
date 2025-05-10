@@ -7,7 +7,7 @@ export default function Header() {
   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-      <header className=" p-4 fixed bottom-0 w-full z-40 md:top-0 md:bottom-auto">
+      <header className=" p-4 fixed bottom-0 w-full z-40 md:top-0 md:bottom-auto md:bg-slate-900">
       {/* Desktop Menu */}
       <div className=" hidden md:flex md:max-w-screen-xl md:mx-auto justify-between items-center">
         <div className="text-white text-2xl font-bold  ">
