@@ -1,8 +1,8 @@
-# 🛍️ Vite React E-commerce Store
+🛍️ Vite React E-commerce Store
 
 A modern e-commerce web app built with React 19, Zustand, Vite, and Tailwind CSS. Features a wishlist, cart functionality, animated UI, and responsive design.
 
-## ✨ Features
+🔍 Features
 
 - Product listing and detail pages
 - Add/remove items from cart
@@ -12,7 +12,7 @@ A modern e-commerce web app built with React 19, Zustand, Vite, and Tailwind CSS
 - Responsive and mobile-friendly layout
 - Built with modern React (v19) and Vite
 
-## 🔧 Technologies Used
+🔧 Technologies Used
 
 - **React 19** – Core UI library
 - **Vite** – Lightning-fast build tool
@@ -24,7 +24,7 @@ A modern e-commerce web app built with React 19, Zustand, Vite, and Tailwind CSS
 - **Lucide Icons** – Icon library
 - **React Hot Toast** – Toast messages
 
-## 📦 Installation
+🚀 Getting Started
 
 1. **Clone the repository:**
 ```bash
