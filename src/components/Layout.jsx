@@ -6,7 +6,7 @@ import { Toaster } from "react-hot-toast";
 const Layout = () => {
   const location = useLocation()
 
-  const noPaddingRoutes = ["/products"]
+  const noPaddingRoutes = ["/products","/"]
   const addPadding = !noPaddingRoutes.includes(location.pathname);
 
   return (

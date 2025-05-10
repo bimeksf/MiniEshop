@@ -152,7 +152,7 @@ export default function ProductList() {
 
   if (isLoading) {
     return (
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4 ">
         {Array.from({ length: productsPerPage }).map((_, index) => (
           <Loader key={index} />
         ))}
@@ -169,8 +169,8 @@ export default function ProductList() {
   };
 
   return (
-    <div className="flex">
-      <div className="fixed top-20 left-0 w-64 h-screen bg-white shadow-lg overflow-y-auto">
+    <div className="flex bg-slate-400">
+      <div className="fixed top-20 left-0 w-64 h-screen bg-white shadow-lg overflow-y-auto ">
         <FilterBar
           products={products}
           selectedCategory={selectedCategory}
@@ -222,7 +222,7 @@ export default function ProductList() {
         </div>
 
         {/* Pagination */}
-        <div className="flex gap-2 justify-center items-center mt-6">
+        <div className="flex gap-2 justify-center items-center mt-6 text-white">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
@@ -233,7 +233,7 @@ export default function ProductList() {
           {Array.from({ length: totalPages }, (_, i) => (
             <button
               className={`p-2 text-xl hover:underline ${
-                currentPage === i + 1 && 'font-medium bg-slate-200 rounded-md'
+                currentPage === i + 1 && 'font-medium underline decoration-2 rounded-md'
               }`}
               key={i}
               onClick={() => setCurrentPage(i + 1)}

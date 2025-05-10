@@ -11,7 +11,7 @@ export default function ProductCard({ id, title, price, category, image, rating 
 
   return (
     <div 
-      className="bg-white border rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col group min-h-[500px] relative"
+      className="bg-white border rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col group h-full relative"
       id={id}
     >
       <div className="relative w-full h-64 bg-slate-100 flex items-center justify-center ">
