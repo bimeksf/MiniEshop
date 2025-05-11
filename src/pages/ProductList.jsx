@@ -169,7 +169,7 @@ export default function ProductList() {
   };
 
   return (
-    <div className="flex bbg-[#414141]">
+    <div className="flex bg-gradient-to-br from-[rgba(36, 30, 30, 1)] to-[rgba(49, 30, 25, 1) ">
       <div className="fixed top-20 left-0 w-64 h-screen bg-white shadow-lg overflow-y-auto ">
         <FilterBar
           products={products}

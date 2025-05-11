@@ -36,7 +36,7 @@ export default function ProductDetailPage() {
   if (!product) return <div>Produkt nenalezen.</div>;
 
   return (
-    <div className="min-h-screen w-full bg-[#414141]">
+    <div className="min-h-screen w-fullbg-gradient-to-br from-[rgba(36, 30, 30, 1)] to-[rgba(49, 30, 25, 1) ">
       <ProductDetail
         key={product.id}
         title={product.title}

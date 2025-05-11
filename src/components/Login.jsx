@@ -33,7 +33,7 @@ export default function Login() {
 
 
   return (
-    <section className="h-screen bg-[#414141] flex items-center justify-center ">
+    <section className="h-screen bg-gradient-to-br from-[rgba(36, 30, 30, 1)] to-[rgba(49, 30, 25, 1)  flex items-center justify-center ">
       <motion.div 
    
            initial={{opacity:0 , y:20}}
