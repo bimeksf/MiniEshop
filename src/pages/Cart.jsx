@@ -12,7 +12,7 @@ export default function Cart() {
   const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <div className="p-4 h-screen  bg-gradient-to-br from-[rgba(36, 30, 30, 1)] to-[rgba(49, 30, 25, 1)  ">
+    <div className="p-4 min-h-screen  bg-gradient-to-br from-[rgba(36, 30, 30, 1)] to-[rgba(49, 30, 25, 1)  ">
       <h1 className="text-2xl font-bold mb-4 text-white">Your Cart</h1>
 
       {cartItems.length === 0 ? (
