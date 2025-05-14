@@ -67,6 +67,18 @@ export default function Header() {
     </li>
     <li>
       <Link
+        to="/wishlist"
+        className="hover:text-gray-400 flex flex-col items-center justify-center gap-1"
+      >
+        <Heart />
+        <span>Wishlist</span>
+      </Link>
+    </li>
+
+
+
+    <li>
+      <Link
         to="/login"
         className="hover:text-gray-400 flex flex-col items-center justify-center gap-1"
       >
