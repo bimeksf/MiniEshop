@@ -1,7 +1,7 @@
 import { useCartStore } from "../contex/cartStore";
 import { Link } from "react-router-dom";
 import { Plus, Minus, X } from "lucide-react";
-
+import { useMemo } from "react";
 export default function Cart() {
   const cartItems = useCartStore((state) => state.cartItems);
   const removeFromCart = useCartStore((state) => state.removeFromCart);
@@ -9,7 +9,10 @@ export default function Cart() {
   const increaseQuantity = useCartStore((state) => state.increaseQuantity);
   const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
 
-  const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const totalPrice = useMemo(() => {
+  return cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+}, [cartItems]);
 
   return (
     <div className="p-4 min-h-screen  bg-gradient-to-br from-[rgba(36, 30, 30, 1)] to-[rgba(49, 30, 25, 1)  ">

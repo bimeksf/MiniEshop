@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { useCartStore } from "../contex/cartStore";
 
-
+import { AlignJustify } from 'lucide-react';
 
 export default function ProductList() {
   const [products, setProducts] = useState([]);
@@ -22,7 +22,7 @@ export default function ProductList() {
   const [minPrice, setMinPrice] = useState("");
   const [checked, setChecked] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  
+  const [open, setOpen] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams(); 
 
   const { addToCart } = useCartStore();
@@ -168,29 +168,50 @@ export default function ProductList() {
     toast.success(`${product.title} added to Cart`);
   };
 
+  const handleOpen = ()=>{
+setOpen(prev=>!prev)
+  }
   return (
     <div className="flex bg-gradient-to-br from-[rgba(36, 30, 30, 1)] to-[rgba(49, 30, 25, 1) ">
-      <div className="fixed top-20 left-0 w-64 h-screen bg-white shadow-lg overflow-y-auto ">
-        <FilterBar
-          products={products}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          setCurrentPage={setCurrentPage}
-          setSortOrder={setSortOrder}
-          sortOrder={sortOrder}
-          setSearchQuery={setSearchQuery}
-          searchQuery={searchQuery}
-          setMinPrice={setMinPrice}
-          setMaxPrice={setMaxPrice}
-          minPrice={minPrice}
-          maxPrice={maxPrice}
-          setChecked={setChecked}
-          checked={checked}
-        />
+
+      <div className="relative">
+<AnimatePresence>
+  {open && (
+    <motion.div
+      key="sidebar"
+      initial={{ x: "-100%", opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: "-100%", opacity: 0 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      className="fixed top-20 left-0 w-64 h-screen bg-white shadow-lg overflow-y-auto z-50"
+    >
+      <FilterBar
+        products={products}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+        setCurrentPage={setCurrentPage}
+        setSortOrder={setSortOrder}
+        sortOrder={sortOrder}
+        setSearchQuery={setSearchQuery}
+        searchQuery={searchQuery}
+        setMinPrice={setMinPrice}
+        setMaxPrice={setMaxPrice}
+        minPrice={minPrice}
+        maxPrice={maxPrice}
+        setChecked={setChecked}
+        checked={checked}
+      />
+    </motion.div>
+  )}
+</AnimatePresence>
+      <div className="absolute left-0 sm:hidden p-4 z-60"  onClick={handleOpen}>
+            <AlignJustify color="white"/>
+
       </div>
+          </div>
 
       {/* Main Content - Product cards and pagination */}
-      <div className="ml-64 w-full p-4">
+      <div className={`${open ?  "ml-64":"ml-0"} w-full p-4 `}>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-16 ">
           {currentProducts.map((item, index) => {
             const isFirstRow = index < 4; // delay for first 4 items

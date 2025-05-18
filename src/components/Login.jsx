@@ -7,6 +7,9 @@ import Submit from "./Submit";
 import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { motion } from "framer-motion"; 
+
+
+
 export default function Login() {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [isHovered, setIsHovered] = useState(false)
@@ -77,14 +80,14 @@ className="absolute left-20 top-[-80px] transform -translate-x-1/2 -translate-y-
 
         <form onSubmit={handleForm} className="flex flex-col gap-4">
           <div className="relative w-full">
-            <input
+            <input 
               type="email"
               id="email"
               name="email"
               required
               onChange={handleChange}
               value={loginData.email}
-              className="w-full p-2 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#111111] rounded-md"
+              className="w-full p-2 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#111111] rounded-md text-white"
               placeholder="Email"
             />
             <MdOutlineEmail
@@ -100,7 +103,7 @@ className="absolute left-20 top-[-80px] transform -translate-x-1/2 -translate-y-
               required
               onChange={handleChange}
               value={loginData.password}
-              className="w-full p-2 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#111111] rounded-md"
+              className="w-full p-2 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#111111] rounded-md text-white"
               placeholder="Password"
             />
             <RiLockPasswordLine
