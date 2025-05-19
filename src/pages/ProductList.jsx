@@ -171,6 +171,8 @@ export default function ProductList() {
   const handleOpen = ()=>{
 setOpen(prev=>!prev)
   }
+
+
   return (
     <div className="flex bg-gradient-to-br from-[rgba(36, 30, 30, 1)] to-[rgba(49, 30, 25, 1) ">
 
@@ -204,14 +206,46 @@ setOpen(prev=>!prev)
     </motion.div>
   )}
 </AnimatePresence>
+<div className="hidden sm:block">
+
+ <motion.div
+      key="sidebar"
+      initial={{ x: "-100%", opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: "-100%", opacity: 0 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      className="fixed top-20 left-0 w-64 h-screen bg-white shadow-lg overflow-y-auto z-50"
+      >
+      <FilterBar
+        products={products}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+        setCurrentPage={setCurrentPage}
+        setSortOrder={setSortOrder}
+        sortOrder={sortOrder}
+        setSearchQuery={setSearchQuery}
+        searchQuery={searchQuery}
+        setMinPrice={setMinPrice}
+        setMaxPrice={setMaxPrice}
+        minPrice={minPrice}
+        maxPrice={maxPrice}
+        setChecked={setChecked}
+        checked={checked}
+        />
+    </motion.div>
+        </div>
       <div className="absolute left-0 sm:hidden p-4 z-60"  onClick={handleOpen}>
             <AlignJustify color="white"/>
 
       </div>
           </div>
 
+
+
+
+
       {/* Main Content - Product cards and pagination */}
-      <div className={`${open ?  "ml-64":"ml-0"} w-full p-4 `}>
+      <div className={`${open ?  "ml-64":"ml-0"} sm:ml-64 w-full p-4 `}>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-16 ">
           {currentProducts.map((item, index) => {
             const isFirstRow = index < 4; // delay for first 4 items
